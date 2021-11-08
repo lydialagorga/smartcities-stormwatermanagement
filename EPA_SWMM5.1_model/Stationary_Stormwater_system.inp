@@ -1,0 +1,172 @@
+[TITLE]
+;;Project Title/Notes
+"Stationary Stormwater System"
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CFS
+INFILTRATION         HORTON
+FLOW_ROUTING         KINWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           11/07/2021
+START_TIME           00:00:00
+REPORT_START_DATE    11/07/2021
+REPORT_START_TIME    00:00:00
+END_DATE             11/07/2021
+END_TIME             12:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:15:00
+WET_STEP             00:05:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:01:00 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         12.566
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.005
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+Gage1            INTENSITY 1:00     1.0      TIMESERIES TS1             
+
+[SUBCATCHMENTS]
+;;Name           Rain Gage        Outlet           Area     %Imperv  Width    %Slope   CurbLen  SnowPack        
+;;-------------- ---------------- ---------------- -------- -------- -------- -------- -------- ----------------
+S1               Gage1            J1               5        25       500      0.5      0                        
+S2               Gage1            J2               5        25       500      0.5      0                        
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+S1               0.01       0.1        0.05       0.05       25         OUTLET    
+S2               0.01       0.1        0.05       0.05       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+S1               3.0        0.5        4          7          0         
+S2               3.0        0.5        4          7          0         
+
+[JUNCTIONS]
+;;Name           Elevation  MaxDepth   InitDepth  SurDepth   Aponded   
+;;-------------- ---------- ---------- ---------- ---------- ----------
+J1               0          0          0          0          0         
+J2               0          0          0          0          0         
+J3               0          0          0          0          0         
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+Outfall1         0          FREE                        NO                       
+
+[STORAGE]
+;;Name           Elev.    MaxDepth   InitDepth  Shape      Curve Name/Params            N/A      Fevap    Psi      Ksat     IMD     
+;;-------------- -------- ---------- ----------- ---------- ---------------------------- -------- --------          -------- --------
+tank1            0        0          0          FUNCTIONAL 1000      0         0        0        0       
+tank2            0        0          0          FUNCTIONAL 1000      0         0        0        0       
+
+[CONDUITS]
+;;Name           From Node        To Node          Length     Roughness  InOffset   OutOffset  InitFlow   MaxFlow   
+;;-------------- ---------------- ---------------- ---------- ---------- ---------- ---------- ---------- ----------
+C1               J1               tank1            400        0.01       0          0          0          0         
+C3               tank1            J3               400        0.01       0          0          0          0         
+C2               J2               tank2            400        0.01       0          0          0          0         
+C4               tank2            J3               400        0.01       0          0          0          0         
+C5               J3               Outfall1         400        0.01       0          0          0          0         
+
+[XSECTIONS]
+;;Link           Shape        Geom1            Geom2      Geom3      Geom4      Barrels    Culvert   
+;;-------------- ------------ ---------------- ---------- ---------- ---------- ---------- ----------
+C1               CIRCULAR     1                0          0          0          1                    
+C3               CIRCULAR     1                0          0          0          1                    
+C2               CIRCULAR     1                0          0          0          1                    
+C4               CIRCULAR     1                0          0          0          1                    
+C5               CIRCULAR     1                0          0          0          1                    
+
+[TIMESERIES]
+;;Name           Date       Time       Value     
+;;-------------- ---------- ---------- ----------
+TS1                         0          0.00      
+TS1                         1          0.2       
+TS1                         2          0.5       
+TS1                         3          0.9       
+TS1                         4          1.8       
+TS1                         5          2         
+TS1                         6          2         
+TS1                         7          2         
+TS1                         8          2         
+TS1                         9          1.7       
+TS1                         10         0.2       
+TS1                         12         0         
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS 0.000 0.000 10000.000 10000.000
+Units      None
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+J1               6983.806           6747.638          
+J2               4804.318           3016.194          
+J3               2004.049           5883.941          
+Outfall1         -850.202           6045.884          
+tank1            5742.240           6464.238          
+tank2            3562.753           2962.213          
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S1               8852.901           7152.497          
+S1               8272.605           5107.962          
+S1               12456.140          4136.302          
+S1               12476.383          5519.568          
+S1               11693.657          7206.478          
+S1               8967.611           7516.869          
+S2               7341.430           4433.198          
+S2               6261.808           3758.435          
+S2               9682.861           924.426           
+S2               12125.506          1174.089          
+S2               12260.459          2449.393          
+S2               11207.827          4068.826          
+S2               9622.132           4062.078          
+S2               7307.692           4500.675          
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+Gage1            10634.278          7995.951          
+
