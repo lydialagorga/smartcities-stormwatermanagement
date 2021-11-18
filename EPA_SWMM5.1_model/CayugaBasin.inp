@@ -1,0 +1,206 @@
+[TITLE]
+;;Project Title/Notes
+
+[OPTIONS]
+;;Option             Value
+FLOW_UNITS           CFS
+INFILTRATION         HORTON
+FLOW_ROUTING         KINWAVE
+LINK_OFFSETS         DEPTH
+MIN_SLOPE            0
+ALLOW_PONDING        NO
+SKIP_STEADY_STATE    NO
+
+START_DATE           11/15/2021
+START_TIME           00:00:00
+REPORT_START_DATE    11/15/2021
+REPORT_START_TIME    00:00:00
+END_DATE             11/17/2021
+END_TIME             00:00:00
+SWEEP_START          01/01
+SWEEP_END            12/31
+DRY_DAYS             0
+REPORT_STEP          00:15:00
+WET_STEP             00:05:00
+DRY_STEP             01:00:00
+ROUTING_STEP         0:00:01 
+RULE_STEP            00:00:00
+
+INERTIAL_DAMPING     PARTIAL
+NORMAL_FLOW_LIMITED  BOTH
+FORCE_MAIN_EQUATION  H-W
+VARIABLE_STEP        0.75
+LENGTHENING_STEP     0
+MIN_SURFAREA         12.566
+MAX_TRIALS           8
+HEAD_TOLERANCE       0.005
+SYS_FLOW_TOL         5
+LAT_FLOW_TOL         5
+MINIMUM_STEP         0.5
+THREADS              1
+
+[EVAPORATION]
+;;Data Source    Parameters
+;;-------------- ----------------
+CONSTANT         0.0
+DRY_ONLY         NO
+
+[RAINGAGES]
+;;Name           Format    Interval SCF      Source    
+;;-------------- --------- ------ ------ ----------
+Gage1            VOLUME    0:01     1.0      TIMESERIES 50year_48hr     
+Gage2            VOLUME    0:01     1.0      TIMESERIES 50year_48hr     
+
+[SUBCATCHMENTS]
+;;Name           Rain Gage        Outlet           Area     %Imperv  Width    %Slope   CurbLen  SnowPack        
+;;-------------- ---------------- ---------------- -------- -------- -------- -------- -------- ----------------
+S1               Gage1            J1               3200     56.35    11806    0.5      0                        
+S2               Gage2            J2               640      61.45    209      0.5      0                        
+
+[SUBAREAS]
+;;Subcatchment   N-Imperv   N-Perv     S-Imperv   S-Perv     PctZero    RouteTo    PctRouted 
+;;-------------- ---------- ---------- ---------- ---------- ---------- ---------- ----------
+S1               0.01       0.1        0.05       0.05       25         OUTLET    
+S2               0.01       0.1        0.05       0.05       25         OUTLET    
+
+[INFILTRATION]
+;;Subcatchment   Param1     Param2     Param3     Param4     Param5    
+;;-------------- ---------- ---------- ---------- ---------- ----------
+S1               3.0        0.5        4          7          0         
+S2               3.0        0.5        4          7          0         
+
+[JUNCTIONS]
+;;Name           Elevation  MaxDepth   InitDepth  SurDepth   Aponded   
+;;-------------- ---------- ---------- ---------- ---------- ----------
+J1               0          0          0          0          0         
+J2               0          0          0          0          0         
+J3               0          0          0          0          0         
+
+[OUTFALLS]
+;;Name           Elevation  Type       Stage Data       Gated    Route To        
+;;-------------- ---------- ---------- ---------------- -------- ----------------
+Outfal1          0          FREE                        NO                       
+
+[STORAGE]
+;;Name           Elev.    MaxDepth   InitDepth  Shape      Curve Name/Params            N/A      Fevap    Psi      Ksat     IMD     
+;;-------------- -------- ---------- ----------- ---------- ---------------------------- -------- --------          -------- --------
+Tank1            0        6.92444    0          FUNCTIONAL 1020      1         0        0        0       
+Tank2            0        7.0629     0          FUNCTIONAL 300       1         0        0        0       
+
+[CONDUITS]
+;;Name           From Node        To Node          Length     Roughness  InOffset   OutOffset  InitFlow   MaxFlow   
+;;-------------- ---------------- ---------------- ---------- ---------- ---------- ---------- ---------- ----------
+C1               J1               Tank1            1000       0.02       0          0          0          0         
+C3               J2               Tank2            1000       0.02       0          0          0          0         
+C4               Tank1            J3               1000       0.02       0          0          0          0         
+C5               Tank2            J3               1000       0.02       0          0          0          0         
+C6               J3               Outfal1          1000       0.02       0          0          0          0         
+
+[XSECTIONS]
+;;Link           Shape        Geom1            Geom2      Geom3      Geom4      Barrels    Culvert   
+;;-------------- ------------ ---------------- ---------- ---------- ---------- ---------- ----------
+C1               CIRCULAR     3.28084          0          0          0          1                    
+C3               CIRCULAR     3.28084          0          0          0          1                    
+C4               CIRCULAR     3.28084          0          0          0          1                    
+C5               CIRCULAR     3.28084          0          0          0          1                    
+C6               CIRCULAR     3.28084          0          0          0          1                    
+
+[TIMESERIES]
+;;Name           Date       Time       Value     
+;;-------------- ---------- ---------- ----------
+50year_48hr                 0:00       0         
+50year_48hr                 1:00       0.11375   
+50year_48hr                 2:00       0.11375   
+50year_48hr                 3:00       0.11375   
+50year_48hr                 4:00       0.11375   
+50year_48hr                 5:00       0.11375   
+50year_48hr                 6:00       0.11375   
+50year_48hr                 7:00       0.11375   
+50year_48hr                 8:00       0.11375   
+50year_48hr                 9:00       0.11375   
+50year_48hr                 10:00      0.11375   
+50year_48hr                 11:00      0.11375   
+50year_48hr                 12:00      0.11375   
+50year_48hr                 13:00      0.11375   
+50year_48hr                 14:00      0.11375   
+50year_48hr                 15:00      0.11375   
+50year_48hr                 16:00      0.11375   
+50year_48hr                 17:00      0.11375   
+50year_48hr                 18:00      0.11375   
+50year_48hr                 19:00      0.11375   
+50year_48hr                 20:00      0.11375   
+50year_48hr                 21:00      0.11375   
+50year_48hr                 22:00      0.11375   
+50year_48hr                 23:00      0.11375   
+50year_48hr                 24:00      0.11375   
+50year_48hr                 25:00      0.11375   
+50year_48hr                 26:00      0.11375   
+50year_48hr                 27:00      0.11375   
+50year_48hr                 28:00      0.11375   
+50year_48hr                 29:00      0.11375   
+50year_48hr                 30:00      0.11375   
+50year_48hr                 31:00      0.11375   
+50year_48hr                 32:00      0.11375   
+50year_48hr                 33:00      0.11375   
+50year_48hr                 34:00      0.11375   
+50year_48hr                 35:00      0.11375   
+50year_48hr                 36:00      0.11375   
+50year_48hr                 37:00      0.11375   
+50year_48hr                 38:00      0.11375   
+50year_48hr                 39:00      0.11375   
+50year_48hr                 40:00      0.11375   
+50year_48hr                 41:00      0.11375   
+50year_48hr                 42:00      0.11375   
+50year_48hr                 43:00      0.11375   
+50year_48hr                 44:00      0.11375   
+50year_48hr                 45:00      0.11375   
+50year_48hr                 46:00      0.11375   
+50year_48hr                 47:00      0.11375   
+50year_48hr                 48:00      0.11375   
+
+[REPORT]
+;;Reporting Options
+SUBCATCHMENTS ALL
+NODES ALL
+LINKS ALL
+
+[TAGS]
+
+[MAP]
+DIMENSIONS 0.000 0.000 10000.000 10000.000
+Units      None
+
+[COORDINATES]
+;;Node           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+J1               6029.312           6434.901          
+J2               6097.478           4764.826          
+J3               671.438            5466.939          
+Outfal1          -835.037           5466.939          
+Tank1            3841.172           6428.085          
+Tank2            3909.339           4744.376          
+
+[VERTICES]
+;;Link           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+
+[Polygons]
+;;Subcatchment   X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+S1               7010.907           7634.628          
+S1               10037.491          7641.445          
+S1               10071.575          6175.869          
+S1               7031.357           6209.952          
+S1               7024.540           7648.262          
+S2               7072.256           5419.223          
+S2               9798.909           5371.506          
+S2               9853.442           3537.832          
+S2               7072.256           3571.915          
+S2               7079.073           5460.123          
+
+[SYMBOLS]
+;;Gage           X-Coord            Y-Coord           
+;;-------------- ------------------ ------------------
+Gage1            9267.212           7716.428          
+Gage2            9349.012           4996.592          
+
